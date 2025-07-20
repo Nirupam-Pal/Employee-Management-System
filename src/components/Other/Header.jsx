@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({data}) => {
   return (
     <div className="flex items-end text-white justify-between">
       <h1 className="text-2xl font-medium">
