@@ -47,7 +47,7 @@ const Login = ({handleLogin}) => {
             <a href="#" className="text-emerald-400 text-sm hover:underline">Forgot password?</a>
           </div>
           <button
-            className="modern-btn outline-none bg-gradient-to-r from-slate-700 via-emerald-800 to-blue-900 text-white text-lg font-bold py-3 px-8 w-full rounded-xl mt-2 shadow-xl transition-all duration-200 relative backdrop-blur-md ring-2 ring-emerald-900 ring-offset-2 ring-offset-gray-900 focus:ring-4 focus:ring-emerald-800 active:scale-95"
+            className="modern-btn cursor-pointer outline-none bg-gradient-to-r from-slate-700 via-emerald-800 to-blue-900 text-white text-lg font-bold py-3 px-8 w-full rounded-xl mt-2 shadow-xl transition-all duration-200 relative backdrop-blur-md ring-2 ring-emerald-900 ring-offset-2 ring-offset-gray-900 focus:ring-4 focus:ring-emerald-800 active:scale-95"
             type="submit"
           >
             Login

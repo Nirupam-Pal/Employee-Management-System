@@ -10,6 +10,7 @@ const App = () => {
   const [loggedInUserData, setloggedInUserData] = useState(null)
   const authdata = useContext(AuthContext)
 
+  // localStorage.clear()
   // useEffect(() => {
   //   if(authdata){
   //     const loggedInUser = localStorage.getItem("loggedInUser")
@@ -18,21 +19,31 @@ const App = () => {
   //     }
   //   }
   // }, [authdata]);
-  
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('loggedInUser')
+    if(loggedInUser){
+      const userData = JSON.parse(loggedInUser)
+      setUser(userData.role);
+      setloggedInUserData(userData.data)
+    }
+
+  }, [])
+
+
 
   const handleLogin = (email, password) => {
-    if (authdata && authdata.admin.find((e)=>email == e.email && password == e.password)) {
+    if (authdata && authdata.admin.find((e) => email == e.email && password == e.password)) {
       setUser('admin');
-      localStorage.setItem('loggedInUser', JSON.stringify({role: 'admin'}))
+      localStorage.setItem('loggedInUser', JSON.stringify({ role: 'admin' }))
     } else if (authdata) {
-      const employee = authdata.employees.find((e)=>email == e.email && password == e.password);
-      if(employee){
+      const employee = authdata.employees.find((e) => email == e.email && password == e.password);
+      if (employee) {
         setUser('employee');
         setloggedInUserData(employee);
-        localStorage.setItem('loggedInUser', JSON.stringify({role: 'employee'}))
+        localStorage.setItem('loggedInUser', JSON.stringify({ role: 'employee', data:employee }))
       }
-      
-      
+
+
     } else {
       alert("Invalid Credentials");
     }
@@ -41,7 +52,7 @@ const App = () => {
   return (
     <>
       {!user && <Login handleLogin={handleLogin} />}
-      {user == "admin" ? <AdminDashboard /> : user == 'employee' ? <EmployeeDashboard data={loggedInUserData}/> : null}
+      {user == "admin" ? <AdminDashboard /> : user == 'employee' ? <EmployeeDashboard data={loggedInUserData} /> : null}
       {/* {user === "employee" && <EmployeeDashboard data={loggedInUserData}/>} */}
     </>
   );
