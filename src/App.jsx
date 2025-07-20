@@ -32,28 +32,29 @@ const App = () => {
 
 
   const handleLogin = (email, password) => {
-    if (authdata && authdata.admin.find((e) => email == e.email && password == e.password)) {
-      setUser('admin');
-      localStorage.setItem('loggedInUser', JSON.stringify({ role: 'admin' }))
-    } else if (authdata) {
+    if (authdata) {
+      const adminUser = authdata.admin.find((e) => email == e.email && password == e.password);
+      if (adminUser) {
+        setUser('admin');
+        setloggedInUserData(adminUser);
+        localStorage.setItem('loggedInUser', JSON.stringify({ role: 'admin', data: adminUser }))
+        return;
+      }
       const employee = authdata.employees.find((e) => email == e.email && password == e.password);
       if (employee) {
         setUser('employee');
         setloggedInUserData(employee);
-        localStorage.setItem('loggedInUser', JSON.stringify({ role: 'employee', data:employee }))
+        localStorage.setItem('loggedInUser', JSON.stringify({ role: 'employee', data: employee }))
+        return;
       }
-
-
-    } else {
-      alert("Invalid Credentials");
     }
+    alert("Invalid Credentials");
   };
 
   return (
     <>
       {!user && <Login handleLogin={handleLogin} />}
-      {user == "admin" ? <AdminDashboard /> : user == 'employee' ? <EmployeeDashboard data={loggedInUserData} /> : null}
-      {/* {user === "employee" && <EmployeeDashboard data={loggedInUserData}/>} */}
+      {user == "admin" ? <AdminDashboard data={loggedInUserData} /> : user == 'employee' ? <EmployeeDashboard data={loggedInUserData} /> : null}
     </>
   );
 };
