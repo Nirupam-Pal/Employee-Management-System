@@ -4,6 +4,7 @@ const employees = [
     firstName: "Aarav",
     email: "employee1@example.com",
     password: "123",
+    role: "Web Developer",
     tasks: [
       {
         active: true,
@@ -48,6 +49,7 @@ const employees = [
     firstName: "Ishaan",
     email: "employee2@example.com",
     password: "123",
+    role: "Frontend Developer", // Added role
     tasks: [
       {
         active: true,
@@ -102,6 +104,7 @@ const employees = [
     firstName: "Rohan",
     email: "employee3@example.com",
     password: "123",
+    role: "Backend Developer", // Added role
     tasks: [
       {
         active: true,
@@ -146,6 +149,7 @@ const employees = [
     firstName: "Priya",
     email: "employee4@example.com",
     password: "123",
+    role: "DevOps Engineer", // Added role
     tasks: [
       {
         active: false,
@@ -200,6 +204,7 @@ const employees = [
     firstName: "Neha",
     email: "employee5@example.com",
     password: "123",
+    role: "QA Engineer", // Added role
     tasks: [
       {
         active: true,

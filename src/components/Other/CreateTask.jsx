@@ -2,7 +2,7 @@ import React from "react";
 
 const CreateTask = () => {
   return (
-    <div className="p-5 bg-gradient-to-br from-[#23272f] via-[#23272f] to-[#181c23] mt-7 rounded-2xl shadow-2xl border border-gray-700 max-w-5xl mx-auto">
+    <div className="p-5 bg-gradient-to-br from-[#23272f] via-[#23272f] to-[#181c23] mt-7 rounded-2xl shadow-2xl border border-gray-700 max-w-7xl mx-auto">
       <form
         action=""
         className="flex flex-wrap w-full items-start justify-between gap-8"
