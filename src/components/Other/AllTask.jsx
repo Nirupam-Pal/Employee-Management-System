@@ -3,11 +3,10 @@ import { AuthContext } from "../../context/AuthProvider";
 
 const AllTask = () => {
   const authData = useContext(AuthContext);
-  console.log(authData.employees);
 
   return (
     <div>
-      <div className="bg-[#1c1c1c]/70 p-6 rounded-2xl mt-8 mb-4 h-92 shadow-xl border border-gray-700 backdrop-blur-md ring-1 ring-emerald-400/10 max-w-7xl mx-auto">
+      <div className="bg-[#1c1c1c]/70 p-6 rounded-2xl mt-8 mb-4 shadow-xl border border-gray-700 backdrop-blur-md ring-1 ring-emerald-400/10 max-w-7xl mx-auto">
         <div
           className="bg-gradient-to-r from-gray-800/80 to-gray-700/80 rounded-xl mb-4 px-6 py-3 flex justify-between items-center shadow-md border-l-4 border-emerald-400"
           id="header"
@@ -26,7 +25,7 @@ const AllTask = () => {
           </div>
         </div>
 
-        <div id="tasklist" className="h-[85%] overflow-auto">
+        <div id="tasklist" className="">
           {authData.employees.map((e, idx) => (
             <div
               key={idx}
