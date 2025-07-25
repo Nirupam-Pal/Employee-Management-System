@@ -1,28 +1,42 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const CreateTask = () => {
-  const [taskTitle, setTaskTitle] = useState('')
-  const [taskDescription, setDescription] = useState('')
-  const [taskDate, settaskDate] = useState('')
-  const [assignTo, setAsignTo] = useState('')
-  const [category, setCategory] = useState('')
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setDescription] = useState("");
+  const [taskDate, settaskDate] = useState("");
+  const [assignTo, setAsignTo] = useState("");
+  const [category, setCategory] = useState("");
 
-  const submitHandler = (e)=>{
+  const [task, setTask] = useState({});
+
+  const submitHandler = (e) => {
     e.preventDefault();
-    setAsignTo('')
-    setCategory('')
-    setDescription('')
-    settaskDate('')
-    setTaskTitle('')
-    alert("Task Created Successfully")
-  }
+
+    const newTask = {
+    taskTitle,
+    taskDescription,
+    taskDate,
+    category,
+    active: false,
+    newTask: true,
+    completed: false,
+    failed: true,
+  };
+  setTask(newTask);
+  };
 
   return (
     <div className="p-5 bg-gradient-to-br from-[#23272f] via-[#23272f] to-[#181c23] mt-7 rounded-2xl shadow-2xl border border-gray-700 max-w-7xl mx-auto">
       <form
         action=""
-        onSubmit={(e)=>{
-          submitHandler(e)
+        onSubmit={(e) => {
+          submitHandler(e);
+          setAsignTo("");
+          setCategory("");
+          setDescription("");
+          settaskDate("");
+          setTaskTitle("");
+          alert("Task Created Successfully");
         }}
         className="flex flex-wrap w-full items-start justify-between gap-8"
       >
@@ -40,7 +54,9 @@ const CreateTask = () => {
             />
           </div>
           <div className="mb-6">
-            <h3 className="text-sm text-gray-200 mb-1 tracking-wide font-semibold uppercase letter-spacing-wider">Date</h3>
+            <h3 className="text-sm text-gray-200 mb-1 tracking-wide font-semibold uppercase letter-spacing-wider">
+              Date
+            </h3>
             <input
               className="text-sm py-2 px-3 w-full rounded-lg outline-none bg-[#181c23] border border-gray-600 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40 transition-all duration-200 placeholder-gray-400 text-white mb-2 shadow-inner focus:shadow-emerald-400/10"
               type="date"
