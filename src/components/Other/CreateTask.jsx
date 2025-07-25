@@ -13,16 +13,30 @@ const CreateTask = () => {
     e.preventDefault();
 
     const newTask = {
-    taskTitle,
-    taskDescription,
-    taskDate,
-    category,
-    active: false,
-    newTask: true,
-    completed: false,
-    failed: true,
-  };
-  setTask(newTask);
+      taskTitle,
+      taskDescription,
+      taskDate,
+      category,
+      active: false,
+      newTask: true,
+      completed: false,
+      failed: false,
+    };
+    setTask(newTask);
+
+    const data = JSON.parse(localStorage.getItem("employees"));
+
+    data.forEach((e) => {
+      if (assignTo == e.firstName) {
+        e.tasks.push(task);
+      }
+    });
+    localStorage.setItem("employees", JSON.stringify(data))
+    setAsignTo("");
+    setCategory("");
+    setDescription("");
+    settaskDate("");
+    setTaskTitle("");
   };
 
   return (
@@ -31,11 +45,7 @@ const CreateTask = () => {
         action=""
         onSubmit={(e) => {
           submitHandler(e);
-          setAsignTo("");
-          setCategory("");
-          setDescription("");
-          settaskDate("");
-          setTaskTitle("");
+
           alert("Task Created Successfully");
         }}
         className="flex flex-wrap w-full items-start justify-between gap-8"
