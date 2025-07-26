@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const CreateTask = () => {
+  const [userdata, setUserData] = useContext(AuthContext);
+
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setDescription] = useState("");
   const [taskDate, settaskDate] = useState("");
@@ -13,9 +16,9 @@ const CreateTask = () => {
     e.preventDefault();
 
     const newTask = {
-      taskTitle,
-      taskDescription,
-      taskDate,
+      title: taskTitle,
+      description: taskDescription,
+      date: taskDate,
       category,
       active: false,
       newTask: true,
@@ -24,14 +27,46 @@ const CreateTask = () => {
     };
     setTask(newTask);
 
-    const data = JSON.parse(localStorage.getItem("employees"));
+    const data = userdata;
 
-    data.forEach((e) => {
-      if (assignTo == e.firstName) {
-        e.tasks.push(task);
+    // data.forEach((e) => {
+    //   if (assignTo == e.firstName) {
+    //     e.tasks.push(task);
+    //     e.taskStats.newTask = e.taskStats.newTask+1;
+    //     e.taskStats.active = e.taskStats.active+1;
+    //   }
+    // });
+
+    const updatedUserdata = userdata.map((emp) => {
+      if (assignTo === emp.firstName) {
+        // Update tasks and taskStats immutably
+        return {
+          ...emp,
+          tasks: [...emp.tasks, newTask],
+          taskStats: {
+            ...emp.taskStats,
+            active: (emp.taskStats.active || 0) + 1,
+            newTask: (emp.taskStats.newTask || 0) + 1,
+          },
+        };
       }
+      return emp;
     });
-    localStorage.setItem("employees", JSON.stringify(data))
+
+    setUserData(updatedUserdata);
+    localStorage.setItem("userdata", JSON.stringify(updatedUserdata));
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser && loggedInUser.role === "employee") {
+      const updatedEmployee = updatedUserdata.find(
+        (e) => e.email === loggedInUser.data.email
+      );
+      localStorage.setItem(
+        "loggedInUser",
+        JSON.stringify({ role: "employee", data: updatedEmployee })
+      );
+    }
+    console.log(updatedUserdata);
+
     setAsignTo("");
     setCategory("");
     setDescription("");
